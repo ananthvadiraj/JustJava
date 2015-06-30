@@ -12,20 +12,13 @@ import java.text.NumberFormat;
  */
 public class MainActivity extends ActionBarActivity {
 
-    public int numberOfCoffees = 0;
-    int price = 5;
+    int quantity = 0;
+    static int price = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
-
-    /**
-     * This method is called when the order button is clicked.
-     */
-    public void submitOrder(View view) {
-        displayPrice(numberOfCoffees * price);
     }
 
     /**
@@ -44,18 +37,30 @@ public class MainActivity extends ActionBarActivity {
         priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
     }
 
-    public void decrementOrder(View view) {
-        TextView decrementOrder = (TextView) findViewById(R.id.decrement_button_view);
-        numberOfCoffees = numberOfCoffees - 1;
-        if (numberOfCoffees > 0) {
-            display(numberOfCoffees - 1);
-        } else
-            display(numberOfCoffees);
+    public void decrement(View view) {
+        if (quantity <= 0) {
+            display(0);
+        } else {
+            quantity = quantity - 1;
+            display(quantity);
+            displayPrice(quantity * price);
+        }
     }
 
-    public void incrementOrder(View view) {
-        TextView incrementOrder = (TextView) findViewById(R.id.decrement_button_view);
-        numberOfCoffees = numberOfCoffees + 1;
-        display(numberOfCoffees);
+    public void increment(View view) {
+        if (quantity >= 0) {
+            quantity = quantity + 1;
+            display(quantity);
+            displayPrice(quantity * price);
+        } else {
+            display(0);
+        }
+    }
+
+    /**
+     * This method is called when the order button is clicked.
+     */
+    public void submitOrder(View view) {
+        displayPrice(quantity * price);
     }
 }
