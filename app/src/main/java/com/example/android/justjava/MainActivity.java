@@ -43,7 +43,6 @@ public class MainActivity extends ActionBarActivity {
         } else {
             quantity = quantity - 1;
             display(quantity);
-            displayPrice(quantity * price);
         }
     }
 
@@ -51,7 +50,6 @@ public class MainActivity extends ActionBarActivity {
         if (quantity >= 0) {
             quantity = quantity + 1;
             display(quantity);
-            displayPrice(quantity * price);
         } else {
             display(0);
         }
